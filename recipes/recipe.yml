@@ -3,7 +3,7 @@
 # image will be published to ghcr.io/<user>/<name>
 name: silverfox
 # description will be included in the image's metadata
-description: A more vanilla GNOME experience, but also good for light customisations.
+description: A more vanilla GNOME experience, with potential for light customisations.
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/silverblue-main
@@ -22,9 +22,10 @@ modules:
       - https://copr.fedorainfracloud.org/coprs/monkeygold/nautilus-open-any-terminal/repo/fedora-%OS_VERSION%/monkeygold-nautilus-open-any-terminal-fedora-%OS_VERSION%.repo
     install:
       - gnome-console
+      - gnome-backgrounds-extras
       - libgda # for Pano
       - libgda-sqlite # for Pano
-      - nautilus-open-any-terminal # to make GNOME Console work on Fedora
+      - nautilus-open-any-terminal
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
@@ -33,7 +34,11 @@ modules:
       - htop
       - nvtop
       - ptyxis 
-      
+
+  - type: gnome-extensions
+    install:
+      - 4998
+
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
     system:
@@ -54,6 +59,7 @@ modules:
         - org.gnome.font-viewer
         - org.gnome.Characters
         - org.gnome.baobab
+        - com.mattjakeman.ExtensionManager
       remove:
         - org.gnome.eog
         - org.gnome.Evince
