@@ -20,12 +20,16 @@ modules:
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/monkeygold/nautilus-open-any-terminal/repo/fedora-%OS_VERSION%/monkeygold-nautilus-open-any-terminal-fedora-%OS_VERSION%.repo
+      - https://copr.fedorainfracloud.org/coprs/alternateved/keyd/repo/fedora-%OS_VERSION%/alternateved-keyd-fedora-%OS_VERSION%.repo
     install:
       - gnome-console
       - gnome-backgrounds-extras
+      - hyfetch
+      - fastfetch
       - libgda # for Pano
       - libgda-sqlite # for Pano
       - nautilus-open-any-terminal
+      - keyd # for Chromebooks and other exotic keyboards
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
@@ -37,7 +41,7 @@ modules:
 
   - type: gnome-extensions
     install:
-      - 4998
+      - 4998 # Legacy (GTK3) Theme Scheme Auto Switcher
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
